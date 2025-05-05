@@ -1,13 +1,15 @@
 import React from "react";
 import Link from "next/link";
 import { Logo } from "./logo";
+import { ModeToggle } from "./mode-toggle";
+import { cn } from "@/lib/utils";
 
 export default function HeaderNav() {
   return (
     <header className=" border-primary/20 bg-background sticky top-0 z-50 w-full border-b">
       <div className="container flex h-16 items-center">
         <Link href="/" className="flex items-center gap-2">
-          <Logo className="h-6 w-8" />
+          <Logo className={cn("h-10 w-10")} />
           <span className="text-primary text-xl font-bold">CineScope</span>
         </Link>
 
@@ -39,6 +41,8 @@ export default function HeaderNav() {
           >
             Admin
           </Link>
+
+          <ModeToggle />
         </nav>
       </div>
     </header>
