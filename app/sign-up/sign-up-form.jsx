@@ -1,33 +1,29 @@
 "use client";
 
+import { useState } from "react";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
 import {
   Card,
   CardContent,
-  CardFooter,
-  CardHeader,
   CardDescription,
+  CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
-import { useState } from "react";
-import { signIn } from "@/lib/auth-client";
-import { redirect } from "next/navigation";
-
+import { signUp } from "@/lib/auth-client";
 
 const DEFAULT_ERROR = {
   error: false,
   message: "",
 };
 
-//client components (CSR)
-export function LoginForm() {
-  const [isLoading, setLoading] = useState(false);
+export function SignUpForm({ className, ...props }) {
   const [error, setError] = useState(DEFAULT_ERROR);
-  const validateForm = ({ email, password }) => {
+
+  const validateForm = ({ email, password, confirmPassword }) => {
     if (email === "") {
       setError({
         error: true,
@@ -43,40 +39,52 @@ export function LoginForm() {
     } else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
       setError({
         error: true,
-        message: "Email is Invalid",
+        message: "Email is invalid",
+      });
+      return false;
+    } else if (password.length < 8) {
+      setError({
+        error: true,
+        message: "Password must be at least 8 characters",
+      });
+      return false;
+    } else if (password !== confirmPassword) {
+      setError({
+        error: true,
+        message: "Passwords do not match",
       });
       return false;
     }
-
     setError(DEFAULT_ERROR);
     return true;
-
-    return true;
   };
+  
   const handleSubmitForm = async (event) => {
-    event.preventDefault();
+    event.preventDefault(); // Prevent default form submission
 
     const formData = new FormData(event.currentTarget);
     const email = formData.get("email");
     const password = formData.get("password");
+    const confirmPassword = formData.get("confirm-password");
 
-    console.log("validate", validateForm({ email, password }));
+    console.log(email, password, confirmPassword);
 
-    if (validateForm({ email, password })) {
-      await signIn.email(
-        { email, password },
+    if (validateForm({ email, password, confirmPassword })) {
+      await signUp.email(
+        { email, password, name: "Guest User", image: undefined },
         {
+          onRequest: (ctx) => {
+            console.log("onRequest", ctx);
+          },
           onSuccess: () => {
-            setLoading(false)
-           redirect("/")
+            redirect("/login");
           },
           onError: (ctx) => {
             setError({
               error: true,
               message: ctx.error.message,
             });
-            setLoading(false)
-            //loading false
+            // loading false
           },
         }
       );
@@ -84,12 +92,12 @@ export function LoginForm() {
   };
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader>
-          <CardTitle>Login to your account</CardTitle>
+          <CardTitle>Create an account</CardTitle>
           <CardDescription>
-            Enter your credentials to login to account
+            Enter your details below to sign up for an account.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -102,29 +110,33 @@ export function LoginForm() {
                   name="email"
                   type="email"
                   placeholder="Enter your email"
+                  required
                   autoComplete="email"
-                ></Input>
+                />
               </div>
-
               <div className="grid gap-3">
-                <div className=" flex items-center">
-                  <Label htmlFor="password">Password</Label>
-                  <Link
-                    href="/forgot-password"
-                    className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                  >
-                    Forgot your password
-                  </Link>
-                </div>
+                <Label htmlFor="password">Password</Label>
                 <Input
                   id="password"
                   name="password"
                   type="password"
                   placeholder="Enter your password"
-                  autoComplete="current-password"
-                ></Input>
+                  required
+                  autoComplete="new-password"
+                />
               </div>
-              {/* error msg here */}
+              <div className="grid gap-3">
+                <Label htmlFor="password">Confirm Password</Label>
+                <Input
+                  id="confirm-password"
+                  name="confirm-password"
+                  type="password"
+                  placeholder="Confirm your password"
+                  required
+                  autoComplete="new-password"
+                />
+              </div>
+              {/* Error Message Here */}
               <div className="flex justify-center">
                 {error.error && (
                   <span className="text-red-600 text-xs text-center animate-pulse duration-700">
@@ -132,19 +144,19 @@ export function LoginForm() {
                   </span>
                 )}
               </div>
-              <div className="flex flex-col gap=3">
-                <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading && <Loader2 className="animate-spin" />} Login
+              <div className="flex flex-col gap-3">
+                <Button type="submit" className="w-full">
+                  Sign Up
+                </Button>
+                <Button type="button" variant="outline" className="w-full">
+                  Continue with Google
                 </Button>
               </div>
-
-              <div className="flex flex-col gap=3">
-                <Button className="w-full" variant="outline"  disable={isLoading}>
-                  Login with Google
-                </Button>
-              </div>
-              <Link href="/sign-up" className="underline underline-offset-4">
-                Sign
+            </div>
+            <div className="mt-4 text-center text-sm">
+              Already have an account?{" "}
+              <Link href="/login" className="underline underline-offset-4">
+                Login
               </Link>
             </div>
           </form>
