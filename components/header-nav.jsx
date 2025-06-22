@@ -43,7 +43,7 @@ export default function HeaderNav() {
           </Link>
 
           <Link
-            href="/Login"
+            href="/login"
             className="hover:text-primary text-sm font-medium transition-colors"
           >
             Login

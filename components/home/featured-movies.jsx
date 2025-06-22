@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react'
 import { Button } from '../ui/button'
-import MoviesList from './movies-list'
+import MoviesList, { MovieListSkeleton } from './movies-list'
 
 
 export default function FeaturedMovies() {
@@ -16,7 +16,7 @@ export default function FeaturedMovies() {
     </div>
 
     {/*Movies list*/}
-    <Suspense fallback={<div className='h-96 animate-pulse rounded-lg bg-muted'></div>}>
+    <Suspense fallback={<MovieListSkeleton/>}>
     <MoviesList/>
     </Suspense>
     

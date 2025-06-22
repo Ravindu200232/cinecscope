@@ -68,7 +68,7 @@ export function LoginForm() {
         {
           onSuccess: () => {
             setLoading(false)
-           redirect("/")
+           redirect("/admin")
           },
           onError: (ctx) => {
             setError({
@@ -133,13 +133,13 @@ export function LoginForm() {
                 )}
               </div>
               <div className="flex flex-col gap=3">
-                <Button type="submit" className="w-full" disabled={isLoading}>
+                <Button type="submit" className="w-full" >
                   {isLoading && <Loader2 className="animate-spin" />} Login
                 </Button>
               </div>
 
               <div className="flex flex-col gap=3">
-                <Button className="w-full" variant="outline"  disable={isLoading}>
+                <Button className="w-full" variant="outline" >
                   Login with Google
                 </Button>
               </div>
