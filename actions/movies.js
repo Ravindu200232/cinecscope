@@ -1,4 +1,8 @@
 //get all movies from the API
+"use server"
+
+import {db} from "@/lib/db";
+
 export const getMovies = async () =>{
     try{
         const response = await fetch("http://localhost:3000/api/v1/movies",{
@@ -25,6 +29,37 @@ export const getMovies = async () =>{
     }catch(error){
         console.log("Error fetching movies",error)
         return undefined;
+    }
+}
+
+//create  movie action
+export const createMovie = async (movie)=>{
+
+    try{
+
+        const result = await db.collection("movies").insertOne(movie);
+
+        if(result.acknowledged){
+
+            console.log(`A movie was inserted with _id: ${result.insertedId}`);
+
+            return {
+                success: true,
+                message: "Movie created successfully",
+            }; 
+        }else{
+            return {
+                success: false,
+                message: "Failed to create movie"
+            }
+        }
+
+    }catch(e){
+        console.log("Error creating movie", e);
+        return {
+            success: false,
+            message: "Error creating movie"
+        }
     }
 }
 
