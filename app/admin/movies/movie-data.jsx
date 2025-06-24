@@ -7,16 +7,19 @@ export default async function MovieData() {
     const movies = await db.collection("movies").find({}).limit(50).toArray();
 
     if(movies.length > 0){
-        const refinedMovies = movies.map((movie,key)=>({
-            id: key+1,
-            title : movie.title,
+        const refinedMovies = movies.map((movie, key) => ({
+            id: movie._id.toString(),
+            title: movie.title,
             year: movie.year,
             genre: movie.genre,
-            rating : movie.rating,
-            poster : movie.poster,
-            runtime : movie.runtime,
-            status : movie.status,
-            imdb : movie.imdb
+            director: movie.director,
+            overview: movie.overview,
+            rating: movie.rating,
+            poster: movie.poster,
+            backdrop: movie.backdrop,
+            runtime: movie.runtime,
+            status: movie.status,
+            imdb: movie.imdb
         }));
 
         return <MovieTable movies={refinedMovies}/>

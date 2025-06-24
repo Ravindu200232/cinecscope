@@ -11,9 +11,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 export function AddMovieForm() {
+
+  const router = useRouter();
 
     const [isSubmitting,setIsSubmitting] =  useState(false);
 
@@ -56,6 +59,9 @@ export function AddMovieForm() {
 
       if(response?.success){
         console.log("Movie added successfully",response)
+        router.refresh();
+      
+        
       }
     };
 
