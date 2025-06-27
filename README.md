@@ -1,7 +1,3 @@
-
-## 📄 `README.md`
-
-````markdown
 # 🎬 Cinecscope
 
 A modern movie discovery and rating web app built with **Next.js 14**, **App Router**, **ShadCN UI**, **Tailwind CSS**, and **MongoDB**.
@@ -66,13 +62,8 @@ cp .env.example .env.local
 npm run dev
 
 # Open http://localhost:3000 in your browser
-````
 
----
 
-## 📁 Folder Structure
-
-```
 /app
   ├── page.tsx          # Root page
   ├── movie/            # Dynamic movie routes
@@ -89,28 +80,10 @@ npm run dev
   ├── 1.png             # Home screenshot
   ├── 2.png             # Movie detail screenshot
   └── 3.png             # Admin screenshot
-```
 
----
 
-## 💻 Author
 
-**Ravindu Madushan**
-📧 [LinkedIn](https://www.linkedin.com/in/ravindu200232)
-
----
-
-## 📜 License
-
-This project is licensed under the MIT License.
-
----
-
-## ⭐️ Show Your Support
-
-If you like this project, give it a ⭐️ on GitHub and share it with your friends!
-
-```
-
----
+💻 Author
+Ravindu Madushan
+📧 LinkedIn
 
