@@ -16,15 +16,11 @@ export const getMovies = async () => {
     });
 
     if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-
-    if (response.status === 200) {
-      return await response.json();
-    } else {
       console.log("No movies found");
       return undefined;
     }
+
+    return await response.json();
   } catch (error) {
     console.log("Error fetching movies", error);
     return undefined;
