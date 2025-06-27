@@ -1,7 +1,6 @@
 import React, { Suspense } from 'react'
 import { Button } from '../ui/button'
 import MoviesList, { MovieListSkeleton } from './movies-list'
-import MovieSelectors from '@/app/admin/movies/movie-selectors'
 
 
 export default function FeaturedMovies() {
@@ -15,8 +14,6 @@ export default function FeaturedMovies() {
 
         <Button variant="outline">View All</Button>
     </div>
-
-    <div className='py-4'><MovieSelectors /></div>
 
     {/*Movies list*/}
     <Suspense fallback={<MovieListSkeleton/>}>
