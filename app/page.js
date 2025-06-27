@@ -1,6 +1,7 @@
 import HeroBanner from "@/components/home/hero-banner";
 import HeaderNav from "../components/header-nav";
 import FeaturedMovies from "@/components/home/featured-movies";
+import { Footer2 } from "@/components/footer2";
 
 //SSR-Server Side REndered - Server Component
 export default function Home() {
@@ -11,7 +12,7 @@ export default function Home() {
         <HeroBanner/>
         <FeaturedMovies/>
       </main>
-      <footer className=" bg-amber-400 h-72 ">Footer Section</footer>
+      <Footer2/>
     </div>
   );
 }
