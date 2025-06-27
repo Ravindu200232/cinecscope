@@ -6,7 +6,8 @@ import { ObjectId } from "mongodb";
 
 export const getMovies = async () => {
   try {
-    const response = await fetch("http://localhost:3000/api/v1/movies", {
+    // using fetch API to get movies from the server
+    const response = await fetch(`${process.env.API_BASE_URL}/v1/movies`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -22,11 +23,11 @@ export const getMovies = async () => {
     if (response.status === 200) {
       return await response.json();
     } else {
-      console.log("No movies found");
+      console.log("No movies found!");
       return undefined;
     }
   } catch (error) {
-    console.log("Error fetching movies", error);
+    console.log("Error fetching movies:", error);
     return undefined;
   }
 };
