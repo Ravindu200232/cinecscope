@@ -81,9 +81,12 @@ npm run dev
   ├── 2.png             # Movie detail screenshot
   └── 3.png             # Admin screenshot
 
+---
+
+💻 Author
+Ravindu Bandara
+📧 LinkedIn
 
 ---
-💻 Author
-Ravindu Madushan
-📧 LinkedIn
+
 
