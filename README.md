@@ -82,7 +82,7 @@ npm run dev
   └── 3.png             # Admin screenshot
 
 
-
+---
 💻 Author
 Ravindu Madushan
 📧 LinkedIn
