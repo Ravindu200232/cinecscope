@@ -44,6 +44,11 @@ A modern movie discovery and rating web app built with **Next.js 14**, **App Rou
 
 ---
 
+💻 Author
+Ravindu Bandara
+📧 LinkedIn
+
+
 ## 🚀 Getting Started Locally
 
 ```bash
@@ -81,12 +86,6 @@ npm run dev
   ├── 2.png             # Movie detail screenshot
   └── 3.png             # Admin screenshot
 
----
 
-💻 Author
-Ravindu Bandara
-📧 LinkedIn
-
----
 
 
